@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .import forms
+from .models import *
 
 def add_category(request):
     if request.method == 'POST':
@@ -11,4 +12,7 @@ def add_category(request):
     else:
         category_form = forms.CategoryForm()
         
-    return render(request, 'add_category.html',{'form': category_form})
+    cateogries = Category.objects.all()
+    
+    return render(request, 'add_category.html',{'form': category_form, 'categories': cateogries})
+
